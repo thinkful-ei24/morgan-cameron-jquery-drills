@@ -7,11 +7,33 @@ const fizzbuzzer = function(num){
   return num;
 };
 
+function generateFizzHtml(fizzbuzzedItem) {
+  let className = '';
+  if (typeof fizzbuzzedItem === 'string') {
+    className = fizzbuzzedItem;
+  }
+
+  return `
+    <div class="fizz-buzz-item ${className}">
+      <span>${fizzbuzzedItem}</span>
+    </div>
+  `;
+}
+
 $(function(){
   $('#number-chooser').on('submit', function(event){
     event.preventDefault();
     const userInputField = $('#number-choice');
     const userInput = userInputField.val();
-    console.log(userInput);
+    userInputField.val('');
+
+    let resultsContainer = $('.js-results');
+
+    const fizzbuzzResults = [];
+    for (let i = 1; i <= userInput; i++) {
+      fizzbuzzResults.push(fizzbuzzer(i));
+    }
+    const htmlElements = fizzbuzzResults.map(result =>        generateFizzHtml(result));
+    $('.js-results').html(htmlElements);
   });
 });
