@@ -2,8 +2,7 @@
 $(function(){
   $('.thumbnails').on('click', '.thumbnail', function(event){
     let largerImage = $('.hero img');
-    let clickedObj = $(event.currentTarget);
-    console.log(clickedObj);
-    largerImage.attr({src: $(event.currentTarget).attr('src')}); 
+    let clickedImage = $(event.currentTarget).children('img');
+    largerImage.attr({src: clickedImage.attr('src'), alt: clickedImage.attr('alt')}); 
   })
 });
